@@ -1,5 +1,6 @@
 package com.example.addressbookapplication.service;
 
+
 import com.example.addressbookapplication.dto.ContactDTO;
 import com.example.addressbookapplication.model.Contact;
 
@@ -14,5 +15,5 @@ public interface IAddressBookService {
 
     Contact updateContact(int contactId, ContactDTO contactDTO);
 
-    void deleteContact(int contactId);
+
 }
