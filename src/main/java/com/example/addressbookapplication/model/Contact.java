@@ -27,6 +27,17 @@ public class Contact {
     public String zip;
     @Column(name="phone")
     public String phone;
+    @Column(name = "Email")
+    public String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 
     public Contact(int contactId,String firstName,String lastName,String address,String state,String city,String zip,String phone) {
         this.contactId = contactId;

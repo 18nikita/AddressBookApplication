@@ -3,8 +3,10 @@ package com.example.addressbookapplication.service;
 import com.example.addressbookapplication.dto.ContactDTO;
 import com.example.addressbookapplication.model.Contact;
 import com.example.addressbookapplication.repository.ContactRepository;
+import com.example.addressbookapplication.util.MailService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,6 +19,9 @@ public class AddressBookService implements IAddressBookService {
 
     @Autowired
     ContactRepository contactRepository;
+
+    @Autowired
+    private MailService mailService;
 
     @Override
     public List<Contact> getContact() {
@@ -41,8 +46,15 @@ public class AddressBookService implements IAddressBookService {
         contactData.setCity(contactDTO.getCity());
         contactData.setZip(contactDTO.getZip());
         contactData.setPhone(contactDTO.getPhone());
+        contactData.setEmail(contactDTO.getEmail());
         contactList.add(contactData);
         contactRepository.save(contactData);
+        try {
+            mailService.sendNotification(contactData);
+        }
+        catch (MailException e){
+            e.printStackTrace();
+        }
         return contactData;
     }
 
